@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:overlay_support/overlay_support.dart';
+import 'package:path/path.dart';
 import 'package:project_samaritan/pages/scan_page.dart';
 import 'package:project_samaritan/utils/catagories_grid.dart';
 import 'package:project_samaritan/utils/popular_medicine_grid.dart';
@@ -11,6 +12,7 @@ import 'package:project_samaritan/utils/heading_row.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:project_samaritan/theme/styles.dart' as styleClass;
 import 'package:project_samaritan/storage/med_storage.dart';
+import 'package:project_samaritan/theme/styles.dart' as style;
 
 late int randomNumber;
 late String titles;
@@ -40,7 +42,7 @@ class _HomeState extends State<Home>
     _animation = ColorTween(
             begin: Colors.deepPurple.shade100, end: Colors.deepPurple.shade200)
         .animate(_controller);
-    _controller.forward();
+    // _controller.forward();
     getMedName();
     InternetConnectionChecker().onStatusChange.listen((status) {
       var hasInternets = status == InternetConnectionStatus.connected;
@@ -235,17 +237,19 @@ class _HomeState extends State<Home>
                 },
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: AnimatedContainer(
-                    onEnd: () {},
+                  child: Container(
+                    // onEnd: () {},
                     padding: const EdgeInsets.all(17),
-                    color: containerColor,
-                    duration: const Duration(milliseconds: 100),
+                    decoration: BoxDecoration(
+                        color: style.Style.medicineDescriptionColorMain),
+                    // color: containerColor,
+                    // duration: const Duration(milliseconds: 100),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Icon(
                             Icons.camera_alt,
-                            color: Color.fromARGB(255, 42, 11, 107),
+                            color: Colors.white,
                           ),
                           // ignore: prefer_const_constructors
                           SizedBox(
@@ -255,7 +259,8 @@ class _HomeState extends State<Home>
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyText1
-                                  ?.copyWith(fontSize: 15))
+                                  ?.copyWith(
+                                      color: Colors.white70, fontSize: 15))
                         ]),
                   ),
                 ),

@@ -12,6 +12,7 @@ import 'package:image_cropper/image_cropper.dart';
 var scannedText;
 var SearchedText;
 
+// ignore: must_be_immutable
 class DisplayPictureScreen extends StatefulWidget {
   String imagePath;
 

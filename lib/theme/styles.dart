@@ -8,6 +8,8 @@ class Style {
   static Color medicineDescriptionColorMain = Color.fromARGB(255, 42, 11, 107);
   static Color flashLightColor = Colors.grey.shade400;
 
+  static Color homeScanButtonColor = Colors.deepPurple.shade500;
+
   static var themeData = ThemeData(
       textTheme: const TextTheme(
           bodyText1: TextStyle(
