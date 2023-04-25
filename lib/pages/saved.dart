@@ -3,7 +3,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:project_samaritan/models/transaction.dart';
 import 'package:project_samaritan/styles.dart' as styleClass;
-import 'package:project_samaritan/services/files.dart';
+
 import 'package:project_samaritan/pages/medicine_Description.dart';
 import '../models/boxes.dart';
 import '../state/app_state.dart';
@@ -18,19 +18,11 @@ class AnotherSaved extends StatefulWidget {
 class _AnotherSavedState extends State<AnotherSaved>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-  late List<int> listOfItems;
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this);
-    initialize();
-  }
-
-  Future<void> initialize() async {
-    listOfItems = List<int>.generate(
-        await readCounter('counter').then((value) => value),
-        (int index) => index);
   }
 
   @override

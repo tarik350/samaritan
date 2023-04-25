@@ -20,30 +20,6 @@ class AppStateContainer extends StatefulWidget {
 class AppStateContainerState extends State<AppStateContainer> {
   AppState state = AppState();
 
-  void incrementMedicineCount() async {
-    final medicineCount =
-        await readCounter('counter').then((value) => value) + 1;
-
-    await writeCounter(medicineCount, 'counter');
-    final newState = state.copy(medicineCount: medicineCount);
-    print(await readCounter('counter').then((value) => value));
-
-    setState(() => state = newState);
-  }
-
-  void decrementMedicineCount() async {
-    final medicineCount =
-        await readCounter('counter').then((value) => value) - 1;
-
-    print(medicineCount);
-
-    await writeCounter(medicineCount, 'counter');
-    final newState = state.copy(medicineCount: medicineCount);
-    setState(() {
-      state = newState;
-    });
-  }
-
   ///i am not sure if i have to put this here but we will change it if necessary
   @override
   void dispose() {
