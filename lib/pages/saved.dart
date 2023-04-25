@@ -8,14 +8,14 @@ import 'package:project_samaritan/pages/medicine_Description.dart';
 import '../models/boxes.dart';
 import '../state/app_state.dart';
 
-class AnotherSaved extends StatefulWidget {
-  const AnotherSaved({super.key});
+class SavedPage extends StatefulWidget {
+  const SavedPage({super.key});
 
   @override
-  State<AnotherSaved> createState() => _AnotherSavedState();
+  State<SavedPage> createState() => _AnotherSavedState();
 }
 
-class _AnotherSavedState extends State<AnotherSaved>
+class _AnotherSavedState extends State<SavedPage>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 

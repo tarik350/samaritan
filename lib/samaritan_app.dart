@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:project_samaritan/pages/saved.dart';
 import 'package:project_samaritan/pages/home.dart';
 import 'package:project_samaritan/pages/scan_page.dart';
+import 'theme/styles.dart' as style;
 
 class SamaritanApp extends StatefulWidget {
   const SamaritanApp({Key? key}) : super(key: key);
@@ -11,55 +13,77 @@ class SamaritanApp extends StatefulWidget {
 }
 
 class _SamaritanAppState extends State<SamaritanApp> {
-  List<Widget> pages = [
-    Home(),
-    CameraScan(),
-    AnotherSaved(),
-  ];
+  int _currentIndex = 0;
+  late PageController _pageController;
+
   int _selectedIndex = 0;
-  void _bottomNavBarNavigator(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+
+  ////
+  static final List _widgetOptions = [Home(), CameraScan(), SavedPage()];
 
   @override
   void initState() {
     super.initState();
+    // _pageController = PageController();
+  }
+
+  @override
+  void dispose() {
+    // _pageController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _selectedIndex,
-          selectedItemColor: Color.fromRGBO(55, 32, 104, 1.0),
-          selectedLabelStyle:
-              const TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
-          onTap: _bottomNavBarNavigator,
-          type: BottomNavigationBarType.fixed,
-          items: const [
-            BottomNavigationBarItem(
-                icon: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(Icons.home),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 20,
+              color: Colors.black.withOpacity(.1),
+            )
+          ],
+        ),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
+            child: GNav(
+              rippleColor: Colors.grey[300]!,
+              hoverColor: Colors.grey[100]!,
+              gap: 8,
+              activeColor: style.Style.medicineDescriptionColorMain,
+              iconSize: 24,
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              duration: const Duration(milliseconds: 400),
+              tabBackgroundColor: Colors.grey[100]!,
+              color: style.Style.medicineDescriptionColorSecondary,
+              tabs: const [
+                GButton(
+                  icon: Icons.food_bank_rounded,
+                  text: 'Home',
                 ),
-                label: 'home'),
-            BottomNavigationBarItem(
-                icon: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(Icons.camera),
+                GButton(
+                  icon: Icons.search,
+                  text: 'Search',
                 ),
-                label: 'scan'),
-            BottomNavigationBarItem(
-                icon: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(Icons.bookmark),
+                GButton(
+                  icon: Icons.shopping_bag,
+                  text: 'Order',
                 ),
-                label: 'saved'),
-          ]),
-      body: pages[_selectedIndex],
+              ],
+              selectedIndex: _selectedIndex,
+              onTabChange: (index) {
+                setState(() {
+                  _selectedIndex = index;
+                });
+              },
+            ),
+          ),
+        ),
+      ),
+      body: Center(child: _widgetOptions.elementAt(_selectedIndex)),
     );
   }
 }

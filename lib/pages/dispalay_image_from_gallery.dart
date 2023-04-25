@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'package:project_samaritan/pages/medicine_Description.dart';
+import 'package:project_samaritan/resources/camera_methods.dart';
+import 'package:project_samaritan/resources/text_recognizer.dart';
 import '../models/post.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -23,34 +25,7 @@ class _DisplayPictureScreenState extends State<DisplayPictureScreen> {
   bool textScanning = false;
   Post? posts;
   Future<Null> _cropImage() async {
-    CroppedFile? croppedFile = await ImageCropper().cropImage(
-        sourcePath: widget.imagePath,
-        aspectRatioPresets: Platform.isAndroid
-            ? [
-                CropAspectRatioPreset.square,
-                CropAspectRatioPreset.ratio3x2,
-                CropAspectRatioPreset.original,
-                CropAspectRatioPreset.ratio4x3,
-                CropAspectRatioPreset.ratio16x9
-              ]
-            : [
-                CropAspectRatioPreset.original,
-                CropAspectRatioPreset.square,
-                CropAspectRatioPreset.ratio3x2,
-                CropAspectRatioPreset.ratio4x3,
-                CropAspectRatioPreset.ratio5x3,
-                CropAspectRatioPreset.ratio5x4,
-                CropAspectRatioPreset.ratio7x5,
-                CropAspectRatioPreset.ratio16x9
-              ],
-        uiSettings: [
-          AndroidUiSettings(
-              toolbarTitle: 'Cropper',
-              toolbarColor: Colors.deepOrange,
-              toolbarWidgetColor: Colors.white,
-              initAspectRatio: CropAspectRatioPreset.original,
-              lockAspectRatio: false),
-        ]);
+    CroppedFile? croppedFile = await CameraMethods.cropImage(widget.imagePath);
     if (croppedFile != null) {
       setState(() {
         widget.imagePath = croppedFile.path;
@@ -130,11 +105,18 @@ class _DisplayPictureScreenState extends State<DisplayPictureScreen> {
                   ),
                 ),
                 onPressed: () async {
-                  await getRecognisedText(XFile(widget.imagePath));
+                  // await getRecognisedText(XFile(widget.imagePath));
+
+                  //we can further modify this to use bloc architecture
+                  // for now we are simply passing the value upon navigation
+                  scannedText = await TextReconitionModel.getRecognisedText(
+                      XFile(widget.imagePath));
+
+                  //why do we need this line
                   if (!mounted) return;
                   // this where we navigate to medicine description page
 
-                  await Navigator.of(context)
+                  Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
                     return MedicineDescription(
                       imagePath: widget.imagePath,
@@ -149,22 +131,22 @@ class _DisplayPictureScreenState extends State<DisplayPictureScreen> {
     );
   }
 
-  getRecognisedText(XFile image) async {
-    final inputImage = InputImage.fromFilePath(image.path);
-    final textDetector = GoogleMlKit.vision.textRecognizer();
-    RecognizedText recognisedText = await textDetector.processImage(inputImage);
-    await textDetector.close();
-    scannedText = "";
-    for (TextBlock block in recognisedText.blocks) {
-      for (TextLine line in block.lines) {
-        scannedText = scannedText + line.text + "\n";
-      }
-    }
+  // getRecognisedText(XFile image) async {
+  //   final inputImage = InputImage.fromFilePath(image.path);
+  //   final textDetector = GoogleMlKit.vision.textRecognizer();
+  //   RecognizedText recognisedText = await textDetector.processImage(inputImage);
+  //   await textDetector.close();
+  //   scannedText = "";
+  //   for (TextBlock block in recognisedText.blocks) {
+  //     for (TextLine line in block.lines) {
+  //       scannedText = scannedText + line.text + "\n";
+  //     }
+  //   }
 
-    print("==========================================" +
-        scannedText +
-        "++++++++++++++++++++++++++");
-    textScanning = false;
-    setState(() {});
-  }
+  //   print("==========================================" +
+  //       scannedText +
+  //       "++++++++++++++++++++++++++");
+  //   textScanning = false;
+  //   setState(() {});
+  // }
 }

@@ -54,6 +54,7 @@ dependencies:
   connectivity_plus: ^2.3.9
   overlay_support: ^1.2.1
   blinking_text:
+  google_nav_bar: ^5.0.6
 
 
 

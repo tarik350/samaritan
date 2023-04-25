@@ -31,13 +31,13 @@ class CameraScanState extends State<CameraScan> with TickerProviderStateMixin {
     Icons.flash_off,
     color: Colors.white,
   );
-  Color flashLightIconColor = Colors.white;
-  String falshLightStatus = 'off';
+
+  //initially use the rear camera
   int selectedCamera = 0;
 
   late String selectedImageFile;
 
-  late XFile image;
+  late String image;
   @override
   void initState() {
     super.initState();
@@ -248,8 +248,9 @@ class CameraScanState extends State<CameraScan> with TickerProviderStateMixin {
                               GestureDetector(
                                 onTap: () async {
                                   try {
-                                    image =
-                                        await _cameraController.takePicture();
+                                    image = await _cameraController
+                                        .takePicture()
+                                        .then((value) => value.path);
 
                                     if (!mounted) return;
 
@@ -258,7 +259,7 @@ class CameraScanState extends State<CameraScan> with TickerProviderStateMixin {
                                       MaterialPageRoute(
                                         builder: (context) =>
                                             DisplayPictureScreen(
-                                          imagePath: image.path,
+                                          imagePath: image,
                                           // Pass the automatically generated path to
                                           // the DisplayPictureScreen widget.
                                           //imagePath: image.path,
@@ -361,15 +362,31 @@ class CameraScanState extends State<CameraScan> with TickerProviderStateMixin {
                         padding: const EdgeInsets.symmetric(vertical: 12.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             //flashlight button
                             //this icon will have an animation to indicate that the flash light is on and of
                             //and it will also turn on and off flash light
+                            widget.exitButton != null
+                                ? IconButton(
+                                    iconSize: 20,
+                                    icon: Icon(
+                                      Icons.arrow_back_ios,
+                                      color: Colors.white,
+                                    ),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                  )
+                                : Container(),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: <Widget>[
                                 IconButton(
-                                    icon: const Icon(Icons.flash_off),
+                                    icon: const Icon(
+                                      Icons.flash_off,
+                                      size: 20,
+                                    ),
                                     color: _cameraController.value.flashMode ==
                                             FlashMode.off
                                         ? style
@@ -379,7 +396,10 @@ class CameraScanState extends State<CameraScan> with TickerProviderStateMixin {
                                         onSetFlashModeButtonPressed(
                                             FlashMode.off)),
                                 IconButton(
-                                    icon: const Icon(Icons.flash_auto),
+                                    icon: const Icon(
+                                      Icons.flash_auto,
+                                      size: 20,
+                                    ),
                                     color: _cameraController.value.flashMode ==
                                             FlashMode.auto
                                         ? style
@@ -389,7 +409,10 @@ class CameraScanState extends State<CameraScan> with TickerProviderStateMixin {
                                         onSetFlashModeButtonPressed(
                                             FlashMode.auto)),
                                 IconButton(
-                                    icon: const Icon(Icons.flash_on),
+                                    icon: const Icon(
+                                      Icons.flash_on,
+                                      size: 20,
+                                    ),
                                     color: _cameraController.value.flashMode ==
                                             FlashMode.always
                                         ? style
@@ -399,7 +422,10 @@ class CameraScanState extends State<CameraScan> with TickerProviderStateMixin {
                                         onSetFlashModeButtonPressed(
                                             FlashMode.always)),
                                 IconButton(
-                                    icon: const Icon(Icons.highlight),
+                                    icon: const Icon(
+                                      Icons.highlight,
+                                      size: 20,
+                                    ),
                                     color: _cameraController.value.flashMode ==
                                             FlashMode.torch
                                         ? style
@@ -410,22 +436,6 @@ class CameraScanState extends State<CameraScan> with TickerProviderStateMixin {
                                             FlashMode.torch)),
                               ],
                             ),
-                            widget.exitButton != null
-                                ? IconButton(
-                                    iconSize: 30,
-                                    icon: const Icon(
-                                      Icons.close,
-                                      color: Colors.white,
-                                    ),
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                  )
-                                : const Icon(
-                                    Icons.close,
-                                    color: Colors.transparent,
-                                    size: 30,
-                                  )
                           ],
                         ),
                       )
