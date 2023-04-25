@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:project_samaritan/start/page1.dart';
-import 'package:project_samaritan/start/page2.dart';
-import 'package:project_samaritan/start/page3.dart';
-import 'package:project_samaritan/start/page4.dart';
+import 'package:project_samaritan/onboarding/page1.dart';
+import 'package:project_samaritan/onboarding/page2.dart';
+import 'package:project_samaritan/onboarding/page3.dart';
+import 'package:project_samaritan/onboarding/page4.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class StartPage extends StatefulWidget {

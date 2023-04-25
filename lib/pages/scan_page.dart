@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'dispalay_image_from_gallery.dart';
 import 'package:photo_manager/photo_manager.dart';
 import '../main.dart';
+import 'package:project_samaritan/theme/styles.dart' as style;
 
 // ignore: must_be_immutable
 class CameraScan extends StatefulWidget {
@@ -371,8 +372,9 @@ class CameraScanState extends State<CameraScan> with TickerProviderStateMixin {
                                     icon: const Icon(Icons.flash_off),
                                     color: _cameraController.value.flashMode ==
                                             FlashMode.off
-                                        ? Colors.orange
-                                        : Colors.blue,
+                                        ? style
+                                            .Style.medicineDescriptionColorMain
+                                        : style.Style.flashLightColor,
                                     onPressed: () =>
                                         onSetFlashModeButtonPressed(
                                             FlashMode.off)),
@@ -380,8 +382,9 @@ class CameraScanState extends State<CameraScan> with TickerProviderStateMixin {
                                     icon: const Icon(Icons.flash_auto),
                                     color: _cameraController.value.flashMode ==
                                             FlashMode.auto
-                                        ? Colors.orange
-                                        : Colors.blue,
+                                        ? style
+                                            .Style.medicineDescriptionColorMain
+                                        : style.Style.flashLightColor,
                                     onPressed: () =>
                                         onSetFlashModeButtonPressed(
                                             FlashMode.auto)),
@@ -389,8 +392,9 @@ class CameraScanState extends State<CameraScan> with TickerProviderStateMixin {
                                     icon: const Icon(Icons.flash_on),
                                     color: _cameraController.value.flashMode ==
                                             FlashMode.always
-                                        ? Colors.orange
-                                        : Colors.blue,
+                                        ? style
+                                            .Style.medicineDescriptionColorMain
+                                        : style.Style.flashLightColor,
                                     onPressed: () =>
                                         onSetFlashModeButtonPressed(
                                             FlashMode.always)),
@@ -398,8 +402,9 @@ class CameraScanState extends State<CameraScan> with TickerProviderStateMixin {
                                     icon: const Icon(Icons.highlight),
                                     color: _cameraController.value.flashMode ==
                                             FlashMode.torch
-                                        ? Colors.orange
-                                        : Colors.blue,
+                                        ? style
+                                            .Style.medicineDescriptionColorMain
+                                        : style.Style.flashLightColor,
                                     onPressed: () =>
                                         onSetFlashModeButtonPressed(
                                             FlashMode.torch)),

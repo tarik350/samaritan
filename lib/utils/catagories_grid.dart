@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_samaritan/styles.dart' as styleClass;
+import 'package:project_samaritan/theme/styles.dart' as styleClass;
 
 class CatagoriesGrid extends StatefulWidget {
   final String name;

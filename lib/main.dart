@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:project_samaritan/home_page.dart';
+import 'package:project_samaritan/samaritan_app.dart';
 import 'package:camera/camera.dart';
 import 'package:project_samaritan/models/transaction.dart';
 import 'package:project_samaritan/pages/drawer%20pages/about.dart';
@@ -12,9 +12,9 @@ import 'package:project_samaritan/pages/drawer%20pages/user_manual.dart';
 import 'package:project_samaritan/pages/popular_medicine.dart';
 import 'package:project_samaritan/pages/scan_page.dart';
 import 'package:project_samaritan/pages/search.dart';
-import 'package:project_samaritan/start/start_page.dart';
+import 'package:project_samaritan/onboarding/start_page.dart';
 import 'package:project_samaritan/state/app_state.dart';
-import 'package:project_samaritan/styles.dart';
+import 'package:project_samaritan/theme/styles.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 

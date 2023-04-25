@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_samaritan/home_page.dart';
+import 'package:project_samaritan/samaritan_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class GetStarted extends StatelessWidget {

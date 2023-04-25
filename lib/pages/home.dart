@@ -9,8 +9,8 @@ import 'package:project_samaritan/utils/catagories_grid.dart';
 import 'package:project_samaritan/utils/popular_medicine_grid.dart';
 import 'package:project_samaritan/utils/heading_row.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:project_samaritan/styles.dart' as styleClass;
-import 'package:project_samaritan/services/storage/med_storage.dart';
+import 'package:project_samaritan/theme/styles.dart' as styleClass;
+import 'package:project_samaritan/storage/med_storage.dart';
 
 late int randomNumber;
 late String titles;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:project_samaritan/pages/medicine_Description.dart';
-import 'package:project_samaritan/styles.dart' as styleClass;
+import 'package:project_samaritan/theme/styles.dart' as styleClass;
 
 // List<String> popular_medication = ["ampicillin","ciprofloxacin","Atorvastatin","Metoprolol","Escitalopram"];
 // int randomNumber = 0;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:project_samaritan/models/transaction.dart';
-import 'package:project_samaritan/styles.dart' as styleClass;
+import 'package:project_samaritan/theme/styles.dart' as styleClass;
 
 import 'package:project_samaritan/pages/medicine_Description.dart';
 import '../models/boxes.dart';
